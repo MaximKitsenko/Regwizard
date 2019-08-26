@@ -3,10 +3,11 @@ using Regwiz.Accounts.Dal.Dto;
 
 namespace Regwiz.Accounts.Dal.Repository.Memory
 {
-    public class ChattingContext : DbContext
+    public class RegwizContext : DbContext
     {
-        public DbSet<UserAccount> UserAccounts { get; set; }
-        public DbSet<UserInfo> UserInfos { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<Province> Provinces { get; set; }
 
         //protected ChattingContext()
         //{

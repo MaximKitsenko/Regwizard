@@ -1,18 +1,19 @@
-﻿namespace Regwiz.Accounts.Dal.Dto
+﻿using System;
+
+namespace Regwiz.Accounts.Dal.Dto
 {
-    public class UserAccount
+    public class Country: IEquatable<Country>
     {
         public int Id { get; set; }
-        public string Mail { get; set; }
-        public string Password { get; set; }
+        public int Name { get; set; }
 
-        public bool Equals(UserAccount other)
+        public bool Equals(Country other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
             return Id == other.Id
                    && Id == other.Id
-                   && string.Equals(Mail, other.Mail);
+                   && Name == other.Name;
         }
 
         public override bool Equals(object obj)
@@ -20,7 +21,7 @@
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((UserAccount)obj);
+            return Equals((User)obj);
         }
 
         public override int GetHashCode()
@@ -29,8 +30,7 @@
             {
                 var hashCode = Id;
                 hashCode = (hashCode * 397) ^ Id;
-                hashCode = (hashCode * 397) ^ (Mail != null ? Mail.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ Password.GetHashCode();
+                hashCode = (hashCode * 397) ^ (Name != null ? Name.GetHashCode() : 0);
                 return hashCode;
             }
         }

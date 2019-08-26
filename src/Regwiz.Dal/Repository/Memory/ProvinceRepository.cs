@@ -6,21 +6,21 @@ using Regwiz.Accounts.Dal.Dto;
 
 namespace Regwiz.Accounts.Dal.Repository.Memory
 {
-    public class UserInfoRepository:IUserInfoRepository
+    public class ProvinceRepository:IProvinceRepository
     {
         private readonly RegwizContext _context;
 
-        public UserInfoRepository(RegwizContext context)
+        public ProvinceRepository(RegwizContext context)
         {
             _context = context;
         }
 
-        public IEnumerable<UserInfo> CreateUserInfos(params UserInfo[] rooms)
+        public IEnumerable<Province> CreateProvinces(params Province[] users)
         {
-            var res = new List<EntityEntry<UserInfo>>();
-            foreach (var room in rooms)
+            var res = new List<EntityEntry<Province>>();
+            foreach (var user in users)
             {
-                var temp = _context.UserInfos.Add(room);
+                var temp = _context.Provinces.Add(user);
                 res.Add(temp);
             }
 
@@ -29,27 +29,27 @@ namespace Regwiz.Accounts.Dal.Repository.Memory
             return res.Select(x => x.Entity).ToList();
         }
 
-        public List<UserInfo> ReadUserInfos(params int[] ids)
+        public List<Province> ReadProvinceInfos(params int[] ids)
         {
-            var rooms = _context.UserInfos.AsNoTracking().Where(r => ids.Contains(r.Id));
+            var rooms = _context.Provinces.AsNoTracking().Where(r => ids.Contains(r.Id));
             return rooms.ToList();
         }
 
-        public void UpdateRooms(params UserInfo[] rooms)
+        public void UpdateRooms(params Province[] rooms)
         {
-            var res = new List<EntityEntry<UserInfo>>();
+            var res = new List<EntityEntry<Province>>();
             foreach (var room in rooms)
             {
-                var temp = _context.UserInfos.Update(room);
+                var temp = _context.Provinces.Update(room);
                 res.Add(temp);
             }
             _context.SaveChanges();
             res.ForEach(x => x.State = EntityState.Detached);
         }
 
-        public void DeleteRooms(params UserInfo[] roomIds)
+        public void DeleteRooms(params Province[] roomIds)
         {
-            _context.UserInfos.RemoveRange(roomIds);
+            _context.Countries.RemoveRange(roomIds);
             _context.SaveChanges();
         }
     }
