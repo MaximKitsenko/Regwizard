@@ -21,7 +21,7 @@ namespace Regwiz.Accounts.Dal.Dto
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((User)obj);
+            return Equals((Country)obj);
         }
 
         public override int GetHashCode()
