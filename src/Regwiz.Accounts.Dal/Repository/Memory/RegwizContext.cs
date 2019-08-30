@@ -15,12 +15,12 @@ namespace Regwiz.Accounts.Dal.Repository.Memory
         //}
 
 
-        //public RegwizContext()
-        //{ }
+        public RegwizContext()
+        { }
 
-        //public RegwizContext(DbContextOptions<RegwizContext> options)
-        //    : base(options)
-        //{ }
+        public RegwizContext(DbContextOptions<RegwizContext> options)
+            : base(options)
+        { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

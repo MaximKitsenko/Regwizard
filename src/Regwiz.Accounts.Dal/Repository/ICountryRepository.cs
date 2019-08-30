@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Regwiz.Accounts.Dal.Dto;
 
 namespace Regwiz.Accounts.Dal.Repository
 {
-    public interface ICountryRepository
+    public interface ICountryRepository:IDisposable
     {
         IEnumerable<Country> CreateCountrys(params Country[] messages);
         List<Country> ReadCountrys(params int[] ids);

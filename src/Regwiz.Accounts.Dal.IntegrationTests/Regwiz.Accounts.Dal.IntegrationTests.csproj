@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\bonanza.utils.core\src\bonanza.utils.core\bonanza.utils.core.csproj" />
+    <ProjectReference Include="..\Regwiz.Accounts.Dal\Regwiz.Accounts.Dal.csproj" />
   </ItemGroup>
 
 </Project>
