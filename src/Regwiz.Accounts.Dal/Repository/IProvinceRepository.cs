@@ -6,8 +6,8 @@ namespace Regwiz.Accounts.Dal.Repository
 {
     public interface IProvinceRepository
     {
-        IEnumerable<EntityEntry<Province>> CreateProvinces(params Province[] messages);
-        List<Province> ReadProvinces(int userId);
+        IEnumerable<Province> CreateProvinces(params Province[] messages);
+        List<Province> ReadProvinces(params int[] ids);
         void UpdateProvinces(params Province[] messages);
         void DeleteProvinces(params Province[] messageIds);
     }

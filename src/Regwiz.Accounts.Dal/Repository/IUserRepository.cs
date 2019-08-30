@@ -6,8 +6,8 @@ namespace Regwiz.Accounts.Dal.Repository
 {
     public interface IUserRepository
     {
-        IEnumerable<EntityEntry<User>> CreateUsers(params User[] messages);
-        List<User> ReadUsers(int userId);
+        IEnumerable<User> CreateUsers(params User[] messages);
+        List<User> ReadUsers(params int[] ids);
         void UpdateUsers(params User[] messages);
         void DeleteUsers(params User[] messageIds);
     }

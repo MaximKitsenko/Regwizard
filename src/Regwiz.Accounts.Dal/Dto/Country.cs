@@ -5,7 +5,7 @@ namespace Regwiz.Accounts.Dal.Dto
     public class Country: IEquatable<Country>
     {
         public int Id { get; set; }
-        public int Name { get; set; }
+        public string Name { get; set; }
 
         public bool Equals(Country other)
         {

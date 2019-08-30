@@ -6,21 +6,21 @@ using Regwiz.Accounts.Dal.Dto;
 
 namespace Regwiz.Accounts.Dal.Repository.Memory
 {
-    public class CountryRepository:ICountryRepository
+    public class UserRepository:IUserRepository
     {
         private readonly RegwizContext _context;
 
-        public CountryRepository(RegwizContext context)
+        public UserRepository(RegwizContext context)
         {
             _context = context;
         }
 
-        public IEnumerable<Country> CreateCountrys(params Country[] rooms)
+        public IEnumerable<User> CreateUsers(params User[] users)
         {
-            var res = new List<EntityEntry<Country>>();
-            foreach (var room in rooms)
+            var res = new List<EntityEntry<User>>();
+            foreach (var user in users)
             {
-                var temp = _context.Countries.Add(room);
+                var temp = _context.Users.Add(user);
                 res.Add(temp);
             }
 
@@ -29,27 +29,27 @@ namespace Regwiz.Accounts.Dal.Repository.Memory
             return res.Select(x => x.Entity).ToList();
         }
 
-        public List<Country> ReadCountrys(params int[] ids)
+        public List<User> ReadUsers(params int[] ids)
         {
-            var rooms = _context.Countries.AsNoTracking().Where(r => ids.Contains(r.Id));
+            var rooms = _context.Users.AsNoTracking().Where(r => ids.Contains(r.Id));
             return rooms.ToList();
         }
 
-        public void UpdateCountrys(params Country[] rooms)
+        public void UpdateUsers(params User[] rooms)
         {
-            var res = new List<EntityEntry<Country>>();
+            var res = new List<EntityEntry<User>>();
             foreach (var room in rooms)
             {
-                var temp = _context.Countries.Update(room);
+                var temp = _context.Users.Update(room);
                 res.Add(temp);
             }
             _context.SaveChanges();
             res.ForEach(x => x.State = EntityState.Detached);
         }
 
-        public void DeleteCountrys(params Country[] roomIds)
+        public void DeleteUsers(params User[] roomIds)
         {
-            _context.Countries.RemoveRange(roomIds);
+            _context.Users.RemoveRange(roomIds);
             _context.SaveChanges();
         }
     }

@@ -29,13 +29,13 @@ namespace Regwiz.Accounts.Dal.Repository.Memory
             return res.Select(x => x.Entity).ToList();
         }
 
-        public List<Province> ReadProvinceInfos(params int[] ids)
+        public List<Province> ReadProvinces(params int[] ids)
         {
             var rooms = _context.Provinces.AsNoTracking().Where(r => ids.Contains(r.Id));
             return rooms.ToList();
         }
 
-        public void UpdateRooms(params Province[] rooms)
+        public void UpdateProvinces(params Province[] rooms)
         {
             var res = new List<EntityEntry<Province>>();
             foreach (var room in rooms)
@@ -47,9 +47,9 @@ namespace Regwiz.Accounts.Dal.Repository.Memory
             res.ForEach(x => x.State = EntityState.Detached);
         }
 
-        public void DeleteRooms(params Province[] roomIds)
+        public void DeleteProvinces(params Province[] roomIds)
         {
-            _context.Countries.RemoveRange(roomIds);
+            _context.Provinces.RemoveRange(roomIds);
             _context.SaveChanges();
         }
     }
