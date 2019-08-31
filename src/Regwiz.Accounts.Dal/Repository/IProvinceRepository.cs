@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Regwiz.Accounts.Dal.Dto;
 
 namespace Regwiz.Accounts.Dal.Repository
@@ -10,5 +9,6 @@ namespace Regwiz.Accounts.Dal.Repository
         List<Province> ReadProvinces(params int[] ids);
         void UpdateProvinces(params Province[] messages);
         void DeleteProvinces(params Province[] messageIds);
+        List<Province> ReadAllProvinces();
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Regwiz.Accounts.Dal.Dto
 {
-    public class User : IEquatable<User>
+    public partial class User : IEquatable<User>
     {
         public int Id { get; set; }
         public string Mail { get; set; }
@@ -13,10 +13,7 @@ namespace Regwiz.Accounts.Dal.Dto
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Id == other.Id
-                   && Id == other.Id
-                   && ProvinceId == other.ProvinceId
-                   && string.Equals(Mail, other.Mail);
+            return Id == other.Id && string.Equals(Mail, other.Mail) && string.Equals(Password, other.Password) && ProvinceId == other.ProvinceId;
         }
 
         public override bool Equals(object obj)
@@ -24,7 +21,7 @@ namespace Regwiz.Accounts.Dal.Dto
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((User)obj);
+            return Equals((User) obj);
         }
 
         public override int GetHashCode()
@@ -32,10 +29,9 @@ namespace Regwiz.Accounts.Dal.Dto
             unchecked
             {
                 var hashCode = Id;
-                hashCode = (hashCode * 397) ^ Id;
-                hashCode = (hashCode * 397) ^ ProvinceId;
                 hashCode = (hashCode * 397) ^ (Mail != null ? Mail.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ Password.GetHashCode();
+                hashCode = (hashCode * 397) ^ (Password != null ? Password.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ ProvinceId;
                 return hashCode;
             }
         }

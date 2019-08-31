@@ -13,10 +13,8 @@ using Xunit;
 
 namespace Regwiz.Accounts.Dal.IntegrationTests.Repository.Memory
 {
-    public class CountryRepositoryTest : IClassFixture<DbFixture>, IDisposable
+    public class CountryRepositoryTest : RepositoryTestBase
     {
-        private readonly ServiceProvider _serviceProvider;
-
         /// <summary>
         /// The constructor will be called before each test [fact]
         /// </summary>
@@ -25,15 +23,6 @@ namespace Regwiz.Accounts.Dal.IntegrationTests.Repository.Memory
         {
             // fact setup
             _serviceProvider = fixture.ServiceProvider;
-        }
-
-        /// <summary>
-        /// Dispose will be called after each test [fact]
-        /// </summary>
-        public void Dispose()
-        {
-            var dbContext = _serviceProvider.GetService<RegwizContext>();
-            dbContext.Database.EnsureDeleted(); // this will clean the db for each test
         }
 
 

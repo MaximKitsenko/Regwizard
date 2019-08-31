@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Regwiz.Accounts.Dal.Dto;
 
 namespace Regwiz.Accounts.Dal.Repository
@@ -10,5 +9,6 @@ namespace Regwiz.Accounts.Dal.Repository
         List<User> ReadUsers(params int[] ids);
         void UpdateUsers(params User[] messages);
         void DeleteUsers(params User[] messageIds);
+        List<User> ReadAllUsers();
     }
 }
