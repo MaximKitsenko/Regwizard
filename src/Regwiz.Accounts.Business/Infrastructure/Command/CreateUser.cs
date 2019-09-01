@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Regwiz.Accounts.Dal.Infrastructure.Command
+namespace Regwiz.Accounts.Business.Infrastructure.Command
 {
     public class CreateUser : ICommand
     {

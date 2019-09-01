@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Regwiz.Accounts.Dal.Exceptions
+namespace Regwiz.Accounts.Business.Exceptions
 {
     [Serializable]
-    public class CommandHandlerNotFoundException : Exception
+    public class QueryHandlerNotFoundException : Exception
     {
         //
         // For guidelines regarding the creation of new exception types, see
@@ -13,19 +13,19 @@ namespace Regwiz.Accounts.Dal.Exceptions
         //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dncscol/html/csharp07192001.asp
         //
 
-        public CommandHandlerNotFoundException()
+        public QueryHandlerNotFoundException()
         {
         }
 
-        public CommandHandlerNotFoundException(string message) : base(message)
+        public QueryHandlerNotFoundException(string message) : base(message)
         {
         }
 
-        public CommandHandlerNotFoundException(string message, Exception inner) : base(message, inner)
+        public QueryHandlerNotFoundException(string message, Exception inner) : base(message, inner)
         {
         }
 
-        protected CommandHandlerNotFoundException(
+        protected QueryHandlerNotFoundException(
             SerializationInfo info,
             StreamingContext context) : base(info, context)
         {

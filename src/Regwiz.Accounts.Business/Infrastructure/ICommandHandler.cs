@@ -1,4 +1,4 @@
-﻿namespace Regwiz.Accounts.Dal.Infrastructure
+﻿namespace Regwiz.Accounts.Business.Infrastructure
 {
     public interface ICommandHandler<in TCommand> where TCommand : ICommand
     {

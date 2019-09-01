@@ -1,6 +1,6 @@
 ﻿using Regwiz.Accounts.Dal.Dto;
 
-namespace Regwiz.Accounts.Dal.Infrastructure.Query
+namespace Regwiz.Accounts.Business.Infrastructure.Query
 {
     public class FindUsersBySearchTextQuery : IQuery<User[]>
     {

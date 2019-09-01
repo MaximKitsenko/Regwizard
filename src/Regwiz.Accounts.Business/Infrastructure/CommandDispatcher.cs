@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
-using Regwiz.Accounts.Dal.Exceptions;
+using Regwiz.Accounts.Business.Exceptions;
 
-namespace Regwiz.Accounts.Dal.Infrastructure
+namespace Regwiz.Accounts.Business.Infrastructure
 {
     public class CommandDispatcher : ICommandDispatcher
     {

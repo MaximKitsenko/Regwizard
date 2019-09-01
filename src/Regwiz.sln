@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bonanza.utils.core", "..\..
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Regwiz.Accounts.Dal", "Regwiz.Accounts.Dal\Regwiz.Accounts.Dal.csproj", "{75CEFA29-A413-4963-B543-20F25FE28E20}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regwiz.Accounts.Business", "Regwiz.Accounts.Business\Regwiz.Accounts.Business.csproj", "{4C128612-66A6-4156-822E-B9418FED0EA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regwiz.Accounts.Api", "Regwiz.Accounts.Api\Regwiz.Accounts.Api.csproj", "{9F82F8C1-BB5E-4E5E-88AF-0DDA8A93E59C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{75CEFA29-A413-4963-B543-20F25FE28E20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75CEFA29-A413-4963-B543-20F25FE28E20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75CEFA29-A413-4963-B543-20F25FE28E20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C128612-66A6-4156-822E-B9418FED0EA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C128612-66A6-4156-822E-B9418FED0EA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C128612-66A6-4156-822E-B9418FED0EA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C128612-66A6-4156-822E-B9418FED0EA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F82F8C1-BB5E-4E5E-88AF-0DDA8A93E59C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F82F8C1-BB5E-4E5E-88AF-0DDA8A93E59C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F82F8C1-BB5E-4E5E-88AF-0DDA8A93E59C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F82F8C1-BB5E-4E5E-88AF-0DDA8A93E59C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
