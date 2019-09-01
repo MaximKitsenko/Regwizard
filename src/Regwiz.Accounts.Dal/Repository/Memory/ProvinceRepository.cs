@@ -15,7 +15,7 @@ namespace Regwiz.Accounts.Dal.Repository.Memory
             _context = context;
         }
 
-        public IEnumerable<Province> CreateProvinces(params Province[] provinces)
+        public IEnumerable<Province> Create(params Province[] provinces)
         {
             var res = new List<EntityEntry<Province>>();
             foreach (var province in provinces)
@@ -29,19 +29,19 @@ namespace Regwiz.Accounts.Dal.Repository.Memory
             return res.Select(x => x.Entity).ToList();
         }
 
-        public List<Province> ReadProvinces(params int[] ids)
+        public List<Province> Read(params int[] ids)
         {
             var provinces = _context.Provinces.AsNoTracking().Where(r => ids.Contains(r.Id));
             return provinces.ToList();
         }
         
-        public List<Province> ReadAllProvinces()
+        public List<Province> ReadAll()
         {
             var provinces = _context.Provinces.AsNoTracking();
             return provinces.ToList();
         }
         
-        public void UpdateProvinces(params Province[] provinces)
+        public void Update(params Province[] provinces)
         {
             var res = new List<EntityEntry<Province>>();
             foreach (var province in provinces)
@@ -53,7 +53,7 @@ namespace Regwiz.Accounts.Dal.Repository.Memory
             res.ForEach(x => x.State = EntityState.Detached);
         }
         
-        public void DeleteProvinces(params Province[] ids)
+        public void Delete(params Province[] ids)
         {
             _context.Provinces.RemoveRange(ids);
             _context.SaveChanges();

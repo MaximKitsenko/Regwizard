@@ -16,7 +16,7 @@ namespace Regwiz.Accounts.Dal.Repository.Memory
             _context = context;
         }
 
-        public IEnumerable<Country> CreateCountries(params Country[] countries)
+        public IEnumerable<Country> Create(params Country[] countries)
         {
             var res = new List<EntityEntry<Country>>();
             foreach (var country in countries)
@@ -30,19 +30,19 @@ namespace Regwiz.Accounts.Dal.Repository.Memory
             return res.Select(x => x.Entity).ToList();
         }
 
-        public List<Country> ReadCountries(params int[] ids)
+        public List<Country> Read(params int[] ids)
         {
             var countries = _context.Countries.AsNoTracking().Where(r => ids.Contains(r.Id));
             return countries.ToList();
         }
         
-        public List<Country> ReadAllCountries()
+        public List<Country> ReadAll()
         {
             var countries = _context.Countries.AsNoTracking();
             return countries.ToList();
         }
         
-        public void UpdateCountries(params Country[] countries)
+        public void Update(params Country[] countries)
         {
             var res = new List<EntityEntry<Country>>();
             foreach (var country in countries)
@@ -54,7 +54,7 @@ namespace Regwiz.Accounts.Dal.Repository.Memory
             res.ForEach(x => x.State = EntityState.Detached);
         }
         
-        public void DeleteCountries(params Country[] ids)
+        public void Delete(params Country[] ids)
         {
             _context.Countries.RemoveRange(ids);
             _context.SaveChanges();

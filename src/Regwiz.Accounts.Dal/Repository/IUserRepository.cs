@@ -1,15 +1,13 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Regwiz.Accounts.Dal.Dto;
+using Regwiz.Accounts.Dal.Repository.Memory;
 
 namespace Regwiz.Accounts.Dal.Repository
 {
-    public interface IUserRepository
+    public interface IUserRepository: IRepository<User>
     {
-        IEnumerable<User> CreateUsers(params User[] messages);
-        List<User> ReadUsers(params int[] ids);
-        void UpdateUsers(params User[] messages);
-        void DeleteUsers(params User[] messageIds);
-        List<User> ReadAllUsers();
     }
 }

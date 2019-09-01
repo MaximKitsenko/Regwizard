@@ -4,12 +4,7 @@ using Regwiz.Accounts.Dal.Dto;
 
 namespace Regwiz.Accounts.Dal.Repository
 {
-    public interface ICountryRepository
+    public interface ICountryRepository: IRepository<Country>
     {
-        IEnumerable<Country> CreateCountries(params Country[] messages);
-        List<Country> ReadCountries(params int[] ids);
-        void UpdateCountries(params Country[] messages);
-        void DeleteCountries(params Country[] messageIds);
-        List<Country> ReadAllCountries();
     }
 }

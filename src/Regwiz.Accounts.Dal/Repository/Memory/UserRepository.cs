@@ -15,7 +15,7 @@ namespace Regwiz.Accounts.Dal.Repository.Memory
             _context = context;
         }
 
-        public IEnumerable<User> CreateUsers(params User[] users)
+        public IEnumerable<User> Create(params User[] users)
         {
             var res = new List<EntityEntry<User>>();
             foreach (var user in users)
@@ -29,19 +29,19 @@ namespace Regwiz.Accounts.Dal.Repository.Memory
             return res.Select(x => x.Entity).ToList();
         }
 
-        public List<User> ReadUsers(params int[] ids)
+        public List<User> Read(params int[] ids)
         {
             var users = _context.Users.AsNoTracking().Where(r => ids.Contains(r.Id));
             return users.ToList();
         }
         
-        public List<User> ReadAllUsers()
+        public List<User> ReadAll()
         {
             var users = _context.Users.AsNoTracking();
             return users.ToList();
         }
         
-        public void UpdateUsers(params User[] users)
+        public void Update(params User[] users)
         {
             var res = new List<EntityEntry<User>>();
             foreach (var user in users)
@@ -53,7 +53,7 @@ namespace Regwiz.Accounts.Dal.Repository.Memory
             res.ForEach(x => x.State = EntityState.Detached);
         }
         
-        public void DeleteUsers(params User[] ids)
+        public void Delete(params User[] ids)
         {
             _context.Users.RemoveRange(ids);
             _context.SaveChanges();
