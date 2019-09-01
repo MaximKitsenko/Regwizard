@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -6,7 +7,7 @@ using Regwiz.Accounts.Dal.Dto;
 
 namespace Regwiz.Accounts.Dal.Repository.Memory
 {
-    public class CountryRepository:ICountryRepository
+    public class CountryRepository:ICountryRepository, IDisposable
     {
         private readonly RegwizContext _context;
 
@@ -15,12 +16,12 @@ namespace Regwiz.Accounts.Dal.Repository.Memory
             _context = context;
         }
 
-        public IEnumerable<Country> CreateCountrys(params Country[] rooms)
+        public IEnumerable<Country> CreateCountries(params Country[] countries)
         {
             var res = new List<EntityEntry<Country>>();
-            foreach (var room in rooms)
+            foreach (var country in countries)
             {
-                var temp = _context.Countries.Add(room);
+                var temp = _context.Countries.Add(country);
                 res.Add(temp);
             }
 
@@ -29,39 +30,59 @@ namespace Regwiz.Accounts.Dal.Repository.Memory
             return res.Select(x => x.Entity).ToList();
         }
 
-        public List<Country> ReadCountrys(params int[] ids)
+        public List<Country> ReadCountries(params int[] ids)
         {
-            var rooms = _context.Countries.AsNoTracking().Where(r => ids.Contains(r.Id));
-            return rooms.ToList();
+            var countries = _context.Countries.AsNoTracking().Where(r => ids.Contains(r.Id));
+            return countries.ToList();
         }
-
-        public List<Country> ReadAllCountrys()
+        
+        public List<Country> ReadAllCountries()
         {
-            var rooms = _context.Countries.AsNoTracking();
-            return rooms.ToList();
+            var countries = _context.Countries.AsNoTracking();
+            return countries.ToList();
         }
-
-        public void UpdateCountrys(params Country[] rooms)
+        
+        public void UpdateCountries(params Country[] countries)
         {
             var res = new List<EntityEntry<Country>>();
-            foreach (var room in rooms)
+            foreach (var country in countries)
             {
-                var temp = _context.Countries.Update(room);
+                var temp = _context.Countries.Update(country);
                 res.Add(temp);
             }
             _context.SaveChanges();
             res.ForEach(x => x.State = EntityState.Detached);
         }
-
-        public void DeleteCountrys(params Country[] roomIds)
+        
+        public void DeleteCountries(params Country[] ids)
         {
-            _context.Countries.RemoveRange(roomIds);
+            _context.Countries.RemoveRange(ids);
             _context.SaveChanges();
+        }
+
+        private void ReleaseUnmanagedResources()
+        {
+            // TODO release unmanaged resources here
+        }
+
+        private void Dispose(bool disposing)
+        {
+            //ReleaseUnmanagedResources();
+            //if (disposing)
+            //{
+            //    _context?.Dispose();
+            //}
         }
 
         public void Dispose()
         {
-            _context?.Dispose();
+            //Dispose(true);
+            //GC.SuppressFinalize(this);
+        }
+
+        ~CountryRepository()
+        {
+            //Dispose(false);
         }
     }
 }

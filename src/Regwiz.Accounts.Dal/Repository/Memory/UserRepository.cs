@@ -31,25 +31,31 @@ namespace Regwiz.Accounts.Dal.Repository.Memory
 
         public List<User> ReadUsers(params int[] ids)
         {
-            var rooms = _context.Users.AsNoTracking().Where(r => ids.Contains(r.Id));
-            return rooms.ToList();
+            var users = _context.Users.AsNoTracking().Where(r => ids.Contains(r.Id));
+            return users.ToList();
         }
-
-        public void UpdateUsers(params User[] rooms)
+        
+        public List<User> ReadAllUsers()
+        {
+            var users = _context.Users.AsNoTracking();
+            return users.ToList();
+        }
+        
+        public void UpdateUsers(params User[] users)
         {
             var res = new List<EntityEntry<User>>();
-            foreach (var room in rooms)
+            foreach (var user in users)
             {
-                var temp = _context.Users.Update(room);
+                var temp = _context.Users.Update(user);
                 res.Add(temp);
             }
             _context.SaveChanges();
             res.ForEach(x => x.State = EntityState.Detached);
         }
-
-        public void DeleteUsers(params User[] roomIds)
+        
+        public void DeleteUsers(params User[] ids)
         {
-            _context.Users.RemoveRange(roomIds);
+            _context.Users.RemoveRange(ids);
             _context.SaveChanges();
         }
     }

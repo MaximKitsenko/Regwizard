@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using Regwiz.Accounts.Dal.Dto;
 
 namespace Regwiz.Accounts.Dal.Repository

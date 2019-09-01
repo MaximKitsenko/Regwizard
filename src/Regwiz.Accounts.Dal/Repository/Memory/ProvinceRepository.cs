@@ -15,12 +15,12 @@ namespace Regwiz.Accounts.Dal.Repository.Memory
             _context = context;
         }
 
-        public IEnumerable<Province> CreateProvinces(params Province[] users)
+        public IEnumerable<Province> CreateProvinces(params Province[] provinces)
         {
             var res = new List<EntityEntry<Province>>();
-            foreach (var user in users)
+            foreach (var province in provinces)
             {
-                var temp = _context.Provinces.Add(user);
+                var temp = _context.Provinces.Add(province);
                 res.Add(temp);
             }
 
@@ -31,25 +31,31 @@ namespace Regwiz.Accounts.Dal.Repository.Memory
 
         public List<Province> ReadProvinces(params int[] ids)
         {
-            var rooms = _context.Provinces.AsNoTracking().Where(r => ids.Contains(r.Id));
-            return rooms.ToList();
+            var provinces = _context.Provinces.AsNoTracking().Where(r => ids.Contains(r.Id));
+            return provinces.ToList();
         }
-
-        public void UpdateProvinces(params Province[] rooms)
+        
+        public List<Province> ReadAllProvinces()
+        {
+            var provinces = _context.Provinces.AsNoTracking();
+            return provinces.ToList();
+        }
+        
+        public void UpdateProvinces(params Province[] provinces)
         {
             var res = new List<EntityEntry<Province>>();
-            foreach (var room in rooms)
+            foreach (var province in provinces)
             {
-                var temp = _context.Provinces.Update(room);
+                var temp = _context.Provinces.Update(province);
                 res.Add(temp);
             }
             _context.SaveChanges();
             res.ForEach(x => x.State = EntityState.Detached);
         }
-
-        public void DeleteProvinces(params Province[] roomIds)
+        
+        public void DeleteProvinces(params Province[] ids)
         {
-            _context.Provinces.RemoveRange(roomIds);
+            _context.Provinces.RemoveRange(ids);
             _context.SaveChanges();
         }
     }

@@ -5,6 +5,10 @@ using Xunit;
 
 namespace Regwiz.Accounts.Dal.IntegrationTests.Repository.Memory
 {
+    /// <summary>
+    /// Tests can't be run in parallel within one class.
+    /// Classes can be run in parallel
+    /// </summary>
     public class RepositoryTestBase: IClassFixture<DbFixture>, IDisposable
     {
         protected ServiceProvider _serviceProvider;
@@ -15,7 +19,7 @@ namespace Regwiz.Accounts.Dal.IntegrationTests.Repository.Memory
         public void Dispose()
         {
             var dbContext = _serviceProvider.GetService<RegwizContext>();
-            dbContext.Database.EnsureDeleted(); // this will clean the db for each test
+            dbContext.Database.EnsureDeleted(); // this will clean the db after each test
         }
     }
 }

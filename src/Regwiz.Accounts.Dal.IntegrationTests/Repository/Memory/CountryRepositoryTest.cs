@@ -34,10 +34,10 @@ namespace Regwiz.Accounts.Dal.IntegrationTests.Repository.Memory
             var country = new Country() {Name = "France"};
 
             //a
-            repository.CreateCountrys(country);
+            repository.CreateCountries(country);
 
             //a
-            var countries = repository.ReadAllCountrys().ToListOrAsList();
+            var countries = repository.ReadAllCountries().ToListOrAsList();
             countries.Should().NotBeNullOrEmpty();
             countries.Should().Contain(x => x.Name == country.Name);
         }
@@ -50,7 +50,7 @@ namespace Regwiz.Accounts.Dal.IntegrationTests.Repository.Memory
             using (var repository = _serviceProvider.GetService<ICountryRepository>())
             {
                 var country = new Country() { Name = "France" };
-                var countriesCreated = repository.CreateCountrys(country);
+                var countriesCreated = repository.CreateCountries(country);
                 countriesCreatedIds = countriesCreated.Select(x => x.Id).ToArray();
             }
 
@@ -58,15 +58,15 @@ namespace Regwiz.Accounts.Dal.IntegrationTests.Repository.Memory
             List<Country> countriesForUpdate;
             using (var repository = _serviceProvider.GetService<ICountryRepository>())
             {
-                countriesForUpdate = repository.ReadCountrys(countriesCreatedIds).ToListOrAsList();
+                countriesForUpdate = repository.ReadCountries(countriesCreatedIds).ToListOrAsList();
                 countriesForUpdate.ForEach(x => x.Name += "100500");
-                repository.UpdateCountrys(countriesForUpdate.ToArray());
+                repository.UpdateCountries(countriesForUpdate.ToArray());
             }
 
             //a
             using (var repository = _serviceProvider.GetService<ICountryRepository>())
             {
-                var countriesAfterUpdate = repository.ReadCountrys(countriesCreatedIds).ToListOrAsList();
+                var countriesAfterUpdate = repository.ReadCountries(countriesCreatedIds).ToListOrAsList();
                 countriesAfterUpdate.Should().NotBeNullOrEmpty();
                 countriesAfterUpdate.Should().BeEquivalentTo(countriesForUpdate, options => options.WithoutStrictOrdering());
             }
@@ -80,19 +80,19 @@ namespace Regwiz.Accounts.Dal.IntegrationTests.Repository.Memory
             using (var repository = _serviceProvider.GetService<ICountryRepository>())
             {
                 country = new Country() {Name = "France"};
-                repository.CreateCountrys(country);
+                repository.CreateCountries(country);
             }
 
             //a
             using (var repository = _serviceProvider.GetService<ICountryRepository>())
             {
-                repository.DeleteCountrys(country);
+                repository.DeleteCountries(country);
             }
 
             //a
             using (var repository = _serviceProvider.GetService<ICountryRepository>())
             {
-                var countries = repository.ReadAllCountrys().ToListOrAsList();
+                var countries = repository.ReadAllCountries().ToListOrAsList();
                 countries.Should().NotContain(x => x.Name == country.Name);
             }
         }
