@@ -20,10 +20,13 @@ namespace Regwiz.Accounts.Business
                     options.UseInMemoryDatabase(Guid.NewGuid().ToString());
                     options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
                     options.EnableSensitiveDataLogging();
-                }, ServiceLifetime.Transient)
+                }, ServiceLifetime.Singleton)
                 .AddSingleton<ICountryRepository, CountryRepository>()
                 .AddSingleton<IProvinceRepository, ProvinceRepository>()
                 .AddSingleton<IUserRepository, UserRepository>()
+                //.AddSingleton<IRepository<Country>, CountryRepository>()// more generic than ICountryRepository
+                //.AddSingleton<IRepository<Province>, ProvinceRepository>()
+                //.AddSingleton<IRepository<User>, UserRepository>()
                 .AddSingleton<IQueryHandler<FindUsersBySearchTextQuery, User[]>, UserQueryHandler>()
                 .AddSingleton<ICommandHandler<CreateUser>, UserCommandHandler>()
                 .AddSingleton<ICommandDispatcher, CommandDispatcher>()

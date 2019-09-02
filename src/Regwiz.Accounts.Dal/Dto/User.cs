@@ -4,10 +4,10 @@ namespace Regwiz.Accounts.Dal.Dto
 {
     public partial class User : IEquatable<User>
     {
-        public int Id { get; }
-        public string Mail { get; }
-        public string Password { get; }
-        public int ProvinceId { get;  }
+        public int Id { get; set; }
+        public string Mail { get; set; }
+        public string Password { get; set; }
+        public int ProvinceId { get; set; }
 
         public User(int id, string mail, string password, int provinceId)
         {

@@ -6,9 +6,9 @@ namespace Regwiz.Accounts.Business.Infrastructure
 {
     public class CommandDispatcher : ICommandDispatcher
     {
-        private readonly ServiceProvider _resolver;
+        private readonly IServiceProvider _resolver;
 
-        public CommandDispatcher(ServiceProvider resolver)
+        public CommandDispatcher(IServiceProvider resolver)
         {
             _resolver = resolver;
         }

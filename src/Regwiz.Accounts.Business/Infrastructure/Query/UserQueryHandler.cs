@@ -6,9 +6,9 @@ namespace Regwiz.Accounts.Business.Infrastructure.Query
 {
     public class UserQueryHandler : IQueryHandler<FindUsersBySearchTextQuery, User[]>
     {
-        private readonly IRepository<User> _repository;
+        private readonly IUserRepository _repository;
 
-        public UserQueryHandler(IRepository<User> repository)
+        public UserQueryHandler(IUserRepository repository)
         {
             _repository = repository;
         }

@@ -5,9 +5,9 @@ namespace Regwiz.Accounts.Business.Infrastructure.Command
 {
     public class UserCommandHandler : ICommandHandler<CreateUser>
     {
-        private readonly IRepository<User> _repository;
+        private readonly IUserRepository _repository;
 
-        public UserCommandHandler(IRepository<User> repository)
+        public UserCommandHandler(IUserRepository repository)
         {
             _repository = repository;
         }

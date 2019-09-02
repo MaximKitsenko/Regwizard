@@ -6,9 +6,9 @@ namespace Regwiz.Accounts.Business.Infrastructure
 {
     public class QueryDispatcher : IQueryDispatcher
     {
-        private readonly ServiceProvider _resolver;
+        private readonly IServiceProvider _resolver;
 
-        public QueryDispatcher(ServiceProvider resolver)
+        public QueryDispatcher(IServiceProvider resolver)
         {
             _resolver = resolver;
         }

@@ -7,7 +7,7 @@ using Regwiz.Accounts.Dal.Dto;
 
 namespace Regwiz.Accounts.Dal.Repository.Memory
 {
-    public class CountryRepository:ICountryRepository, IDisposable
+    public class CountryRepository:ICountryRepository
     {
         private readonly RegwizContext _context;
 

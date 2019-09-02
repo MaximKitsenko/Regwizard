@@ -11,6 +11,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Regwiz.Accounts.Business.Infrastructure;
+using Regwiz.Accounts.Business.Infrastructure.Command;
+using Regwiz.Accounts.Business.Infrastructure.Query;
+using Regwiz.Accounts.Dal.Dto;
+using Regwiz.Accounts.Dal.Repository;
+using Regwiz.Accounts.Dal.Repository.Memory;
 
 namespace Regwiz.Accounts.Api
 {
@@ -27,6 +33,24 @@ namespace Regwiz.Accounts.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            //services
+            //    .AddDbContext<RegwizContext>(options =>
+            //    {
+            //        options.UseInMemoryDatabase(Guid.NewGuid().ToString());
+            //        options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            //        options.EnableSensitiveDataLogging();
+            //    }, ServiceLifetime.Transient)
+            //    .AddSingleton<ICountryRepository, CountryRepository>()
+            //    .AddSingleton<IProvinceRepository, ProvinceRepository>()
+            //    .AddSingleton<IUserRepository, UserRepository>()
+            //    .AddSingleton<IRepository<Country>, CountryRepository>()// more generic than ICountryRepository
+            //    .AddSingleton<IRepository<Province>, ProvinceRepository>()
+            //    .AddSingleton<IRepository<User>, UserRepository>()
+            //    .AddSingleton<IQueryHandler<FindUsersBySearchTextQuery, User[]>, UserQueryHandler>()
+            //    .AddSingleton<ICommandHandler<CreateUser>, UserCommandHandler>()
+            //    .AddSingleton<ICommandDispatcher, CommandDispatcher>()
+            //    .AddSingleton<IQueryDispatcher, QueryDispatcher>()
+                ;
             new Regwiz.Accounts.Business.Startup().ConfigureServices(services);
         }
 
