@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regwiz.Accounts.Business", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regwiz.Accounts.Api", "Regwiz.Accounts.Api\Regwiz.Accounts.Api.csproj", "{9F82F8C1-BB5E-4E5E-88AF-0DDA8A93E59C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regwiz.Accounts.Web", "Regwiz.Accounts.Web\Regwiz.Accounts.Web.csproj", "{720535BB-0FDC-42EB-AB6E-DB53931E11B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{9F82F8C1-BB5E-4E5E-88AF-0DDA8A93E59C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F82F8C1-BB5E-4E5E-88AF-0DDA8A93E59C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F82F8C1-BB5E-4E5E-88AF-0DDA8A93E59C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{720535BB-0FDC-42EB-AB6E-DB53931E11B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{720535BB-0FDC-42EB-AB6E-DB53931E11B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{720535BB-0FDC-42EB-AB6E-DB53931E11B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{720535BB-0FDC-42EB-AB6E-DB53931E11B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
