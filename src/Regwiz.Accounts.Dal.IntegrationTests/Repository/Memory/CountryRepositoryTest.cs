@@ -31,7 +31,7 @@ namespace Regwiz.Accounts.Dal.IntegrationTests.Repository.Memory
         {
             //a
             var repository = _serviceProvider.GetService<ICountryRepository>();
-            var country = new Country() {Name = "France"};
+            var country = new Country(0, "France");
 
             //a
             repository.Create(country);
@@ -49,7 +49,7 @@ namespace Regwiz.Accounts.Dal.IntegrationTests.Repository.Memory
             int[] countriesCreatedIds;
             using (var repository = _serviceProvider.GetService<ICountryRepository>())
             {
-                var country = new Country() { Name = "France" };
+                var country = new Country(0, "France");
                 var countriesCreated = repository.Create(country);
                 countriesCreatedIds = countriesCreated.Select(x => x.Id).ToArray();
             }
@@ -79,7 +79,7 @@ namespace Regwiz.Accounts.Dal.IntegrationTests.Repository.Memory
             Country country;
             using (var repository = _serviceProvider.GetService<ICountryRepository>())
             {
-                country = new Country() {Name = "France"};
+                country = new Country(0, "France");
                 repository.Create(country);
             }
 

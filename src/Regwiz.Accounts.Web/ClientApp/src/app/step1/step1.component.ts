@@ -10,6 +10,12 @@ export interface Country {
   name: string;
 }
 
+export interface Province {
+  id: number;
+  countryId: number;
+  name: string;
+}
+
 @Component({
   selector: 'app-step1-component',
   templateUrl: './step1.component.html',
@@ -47,10 +53,18 @@ export interface Country {
     </div>
     <div class="step1" [ngClass]="{invisible: !step2}" >
       <form (ngSubmit)="submit()">
+
         <label for="countries">Country</label>
-        <select id="countries">
+        <select id="countries" [(ngModel)]="selectedCountry" (ngModelChange)="pullProvince($event)">
           <option *ngFor="let country of countries; let i = index" [value]="countries[i].id">
             {{countries[i].name}}
+          </option>
+        </select>
+
+        <label for="provinces">Province</label>
+        <select id="province" [(ngModel)]="selectedProvince">
+          <option *ngFor="let province of provinces; let i = index" [value]="provinces[i].id">
+            {{provinces[i].name}}
           </option>
         </select>
         <button>submit</button>
@@ -58,7 +72,7 @@ export interface Country {
     </div>
 
     <h1> {{login}}!{{password}}!{{confirmPassword}}!{{agree}}!{{loginMeta.invalid}}</h1>
-    <h1> {{!this.loginMeta.invalid }} && {{ !this.passwordMeta.invalid }} && {{this.agree}}</h1>`,
+    <h1> {{!this.loginMeta.invalid }} && {{ !this.passwordMeta.invalid }} && {{this.agree}} && {{this.selectedCountry}} && {{this.selectedProvince}}</h1>`,
   styles: [`.invisible{display:none;}`]
 })
 export class Step1Component {
@@ -83,6 +97,11 @@ export class Step1Component {
   };
   public agree = false;
   public countries: Country[];
+  public provinces: Province[];
+  public selectedCountry: 1;
+  public selectedProvince: 1;
+  public baseUrl: string;
+  public httpClient: HttpClient;
 
   //w3c email validator, doesn't work
   private loginValidator = new RegExp("/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/");
@@ -91,13 +110,9 @@ export class Step1Component {
 
   step2: boolean = true;
 
-  //  = [
-  //  { name:'x1', id:'0', value: 'steak-0', viewValue: 'Rus' },
-  //  { name:'x1', id:'1', value: 'pizza-1', viewValue: 'Usa' },
-  //  { name:'x1', id:'2', value: 'tacos-2', viewValue: 'Ger' }
-  //];
-
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+    this.baseUrl = baseUrl;
+    this.httpClient = http;
     http.get<Country[]>(baseUrl + 'api/SampleData/Countries').subscribe(result => {
       this.countries = result;
     }, error => console.error(error));
@@ -107,7 +122,6 @@ export class Step1Component {
     this.validateLogin(null);
 
     if (!this.loginMeta.invalid && !this.passwordMeta.invalid && this.agree) {
-      //this.countries = 
       this.step2 = !this.step2;
     }
   }
@@ -127,5 +141,11 @@ export class Step1Component {
     //todo: have no time to investigate how validators wor out from the box
     this.loginMeta.invalid = false;
     this.loginMeta.errors.required = false;
+  }
+
+  public pullProvince(e) {
+    this.httpClient.get<Province[]>(this.baseUrl + 'api/SampleData/Provinces').subscribe(result => {
+      this.provinces = result;
+    }, error => console.error(error));
   }
 }

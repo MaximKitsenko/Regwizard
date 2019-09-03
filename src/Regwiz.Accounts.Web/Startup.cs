@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -8,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Regwiz.Accounts.Business.Infrastructure;
 using Regwiz.Accounts.Business.Infrastructure.Command;
+using Regwiz.Accounts.Business.Infrastructure.Query;
+using Regwiz.Accounts.Dal.Dto;
 
 namespace Regwiz.Accounts.Web
 {
@@ -74,10 +79,41 @@ namespace Regwiz.Accounts.Web
                 }
             });
 
+            //init
             var cd = app.ApplicationServices.GetService<ICommandDispatcher>();
-            cd.Execute(new CreateCountry(Guid.NewGuid(), "Rus"));
-            cd.Execute(new CreateCountry(Guid.NewGuid(), "Usa"));
-            cd.Execute(new CreateCountry(Guid.NewGuid(), "Ger"));
+            var qd = app.ApplicationServices.GetService<IQueryDispatcher>();
+            var createCountries = new CreateCountry[]
+            {
+                new CreateCountry(Guid.NewGuid(), "Rus"),
+                new CreateCountry(Guid.NewGuid(), "Usa"),
+                new CreateCountry(Guid.NewGuid(), "Ger")
+            }.ToList();
+
+            createCountries.ForEach(x=> cd.Execute(x));
+
+            Country[] countries = null;
+
+            for (int i = 0; i < 10; i++)//todo replace to retry
+            {
+                countries = qd.Execute<FindCountriesBySearchTextQuery, Country[]>(new FindCountriesBySearchTextQuery("", false));
+                if (countries.Length == 3)
+                {
+                    break;
+                }
+
+                Task.Delay(100).Wait();
+            }
+
+
+            var createProvince = new List<CreateProvince>();
+
+            foreach (var country in countries)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    cd.Execute( new CreateProvince(Guid.Empty, country.Id,country.Name+"-Province-"+i));
+                }
+            }
 
             //
 

@@ -50,6 +50,25 @@ namespace Regwiz.Accounts.Web.Controllers
             return r.Select(x=> new Country(){Id = x.Id,Name = x.Name});
         }
 
+        [HttpGet("[action]")]
+        public IEnumerable<Province> Provinces()
+        {
+            //return Enumerable.Range(1, 5).Select(index => new Country
+            //{
+            //    Name = "asd",
+            //    Id = 1
+            //});
+
+            var r = _queryDispatcher.Execute<FindProvincesBySearchTextQuery, Dal.Dto.Province[]>(new FindProvincesBySearchTextQuery("", false));
+            return r.Select(x => new Province() {Id = x.Id, Name = x.Name, CountryId = x.Id});
+        }
+
+        public class Province
+        {
+            public int Id { get; set; }
+            public int CountryId { get; set; }
+            public string Name { get; set; }
+        }
         public class Country 
         {
             public int Id { get; set; }
