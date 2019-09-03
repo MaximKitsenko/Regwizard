@@ -1,39 +1,63 @@
 import { Component, Input } from '@angular/core';
+import { MatInputModule, MatFormFieldModule } from '@angular/material';
+
+export interface Country {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-step1-component',
   templateUrl: './step1.component.html',
   template: `
-    <div class="form-group">
-          <label for="login">login:</label>
-          <input type="email" name="login" (ngModelChange)="validateLogin($event)" id="login" [(ngModel)]="login" placeholder="login">
-          <div *ngIf="loginMeta.invalid"
-               class="alert alert-danger">
+    <div class="step1" [ngClass]="{invisible: step2}" >
+      <div class="form-group">
+            <label for="login">login:</label>
+            <input type="email" name="login" (ngModelChange)="validateLogin($event)" id="login" [(ngModel)]="login" placeholder="login">
+            <div *ngIf="loginMeta.invalid"
+                 class="alert alert-danger">
 
-            <div *ngIf="loginMeta.errors.required">
-              Name is required.
+              <div *ngIf="loginMeta.errors.required">
+                Name is required.
+              </div>
+              <div *ngIf="loginMeta.errors.isNotMail">
+                Login must be a correct mail.
+              </div>
             </div>
-            <div *ngIf="loginMeta.errors.isNotMail">
-              Login must be a correct mail.
-            </div>
-          </div>
+      </div>
+      <div class="form-group">
+        <label for="password">password:</label>
+        <input type="password" name="password" id="password" [(ngModel)]="password" placeholder="password">
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">password:</label>
+        <input type="password" name="confirmPassword" id="confirmPassword" [(ngModel)]="confirmPassword" placeholder="confirm password">
+      </div>
+      <div class="form-group">
+        <label for="agree">agree:</label>
+        <input type="checkbox" name="agree" id="agree" [(ngModel)]="agree" >
+      </div>
+      <div class="form-group">
+        <input type="button" (click)="goNext()" name="next" id="next" value="Next" >
+      </div>
     </div>
-    <div class="form-group">
-      <label for="password">password:</label>
-      <input type="password" name="password" id="password" [(ngModel)]="password" placeholder="password">
-    </div>
-    <div class="form-group">
-      <label for="confirmPassword">password:</label>
-      <input type="password" name="confirmPassword" id="confirmPassword" [(ngModel)]="confirmPassword" placeholder="confirm password">
-    </div>
-    <div class="form-group">
-      <label for="agree">agree:</label>
-      <input type="checkbox" name="agree" id="agree" [(ngModel)]="agree" >
-    </div>
-    <div class="form-group">
-      <input type="button" (click)="validateLogin()" name="next" id="next" value="Next" >
-    </div>
-    <h1> {{login}}!{{password}}!{{confirmPassword}}!{{agree}}!{{loginMeta.invalid}}</h1>`
+
+<div class="step1" [ngClass]="{invisible: !step2}" >
+  <div class="form-group">
+    <mat-form-field>
+      <mat-label>Country</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let country of countries" [value]="country.value">
+          {{country.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+</div>
+    <h1> {{login}}!{{password}}!{{confirmPassword}}!{{agree}}!{{loginMeta.invalid}}</h1>
+    <h1> {{!this.loginMeta.invalid }} && {{ !this.passwordMeta.invalid }} && {{this.agree}}</h1>`,
+  styles: [`.invisible{display:none;}`]
 })
 export class Step1Component {
   @Input()
@@ -47,13 +71,40 @@ export class Step1Component {
   };
 
   public password = '';
+  public passwordMeta = {
+    invalid: false,
+    errors: { required: false, }
+  };
+
   public confirmPassword = '';
+  public confirmPasswordMeta = {
+    invalid: false,
+    errors: { required: false, }
+  };
+
   public agree = false;
 
   //w3c email validator, doesn't work
   private loginValidator = new RegExp("/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/");
   //https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
   private loginValidatorSo = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^ <>() \[\]\\.,;: \s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  step2: boolean = true;
+
+  countries: Country[] = [
+    { value: 'steak-0', viewValue: 'Rus' },
+    { value: 'pizza-1', viewValue: 'Usa' },
+    { value: 'tacos-2', viewValue: 'Ger' }
+  ];
+
+  public goNext(e) {
+    this.validateLogin(null);
+
+    if (!this.loginMeta.invalid && !this.passwordMeta.invalid && this.agree) {
+      this.step2 = !this.step2;
+    }
+  }
+
 
   public validateLogin(e) {
     if (!this.login) {
