@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -5,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Regwiz.Accounts.Business.Infrastructure;
+using Regwiz.Accounts.Business.Infrastructure.Command;
 
 namespace Regwiz.Accounts.Web
 {
@@ -29,7 +32,8 @@ namespace Regwiz.Accounts.Web
             });
 
             new Business.Startup().ConfigureServices(services);
-           
+
+
 
         }
 
@@ -69,6 +73,11 @@ namespace Regwiz.Accounts.Web
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
+            var cd = app.ApplicationServices.GetService<ICommandDispatcher>();
+            cd.Execute(new CreateCountry(Guid.NewGuid(), "Rus"));
+            cd.Execute(new CreateCountry(Guid.NewGuid(), "Usa"));
+            cd.Execute(new CreateCountry(Guid.NewGuid(), "Ger"));
 
             //
 

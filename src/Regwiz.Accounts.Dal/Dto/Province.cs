@@ -4,8 +4,15 @@ namespace Regwiz.Accounts.Dal.Dto
 {
     public partial class Province : IEquatable<Province>
     {
+        public Province(int id, int countryId, string name)
+        {
+            Id = id;
+            CountryId = countryId;
+            Name = name;
+        }
+
         public int Id { get; set; }
-        public int Name { get; set; }
+        public string Name { get; set; }
         public int CountryId { get; set; }
 
         public bool Equals(Province other)
@@ -28,7 +35,7 @@ namespace Regwiz.Accounts.Dal.Dto
             unchecked
             {
                 var hashCode = Id;
-                hashCode = (hashCode * 397) ^ Name;
+                hashCode = (hashCode * 397) ^ (Name != null ? Name.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ CountryId;
                 return hashCode;
             }

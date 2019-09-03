@@ -1,7 +1,7 @@
 ﻿using Regwiz.Accounts.Dal.Dto;
 using Regwiz.Accounts.Dal.Repository;
 
-namespace Regwiz.Accounts.Business.Infrastructure.Command
+namespace Regwiz.Accounts.Business.Infrastructure.Command.Handlers
 {
     public class UserCommandHandler : ICommandHandler<CreateUser>
     {

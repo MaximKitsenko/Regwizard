@@ -2,7 +2,7 @@
 using Regwiz.Accounts.Dal.Dto;
 using Regwiz.Accounts.Dal.Repository;
 
-namespace Regwiz.Accounts.Business.Infrastructure.Query
+namespace Regwiz.Accounts.Business.Infrastructure.Query.Handlers
 {
     public class UserQueryHandler : IQueryHandler<FindUsersBySearchTextQuery, User[]>
     {

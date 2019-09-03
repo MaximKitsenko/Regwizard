@@ -4,6 +4,12 @@ namespace Regwiz.Accounts.Dal.Dto
 {
     public partial class Country: IEquatable<Country>
     {
+        public Country(int id, string name)
+        {
+            this.Id = id;
+            Name = name;
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
 
