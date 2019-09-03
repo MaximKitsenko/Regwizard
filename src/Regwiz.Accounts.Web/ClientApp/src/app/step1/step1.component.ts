@@ -53,9 +53,8 @@ export interface Province {
     </div>
     <div class="step1" [ngClass]="{invisible: !step2}" >
       <form (ngSubmit)="submit()">
-
         <label for="countries">Country</label>
-        <select id="countries" [(ngModel)]="selectedCountry" (ngModelChange)="pullProvince($event)">
+        <select id="countries" [(ngModel)]="selectedCountry" (change)="pullProvince($event)"  >
           <option *ngFor="let country of countries; let i = index" [value]="countries[i].id">
             {{countries[i].name}}
           </option>
@@ -63,7 +62,7 @@ export interface Province {
 
         <label for="provinces">Province</label>
         <select id="province" [(ngModel)]="selectedProvince">
-          <option *ngFor="let province of provinces; let i = index" [value]="provinces[i].id">
+          <option *ngFor="let province of provinces; let i = index" [value]="provinces[i].id" >
             {{provinces[i].name}}
           </option>
         </select>
@@ -71,7 +70,6 @@ export interface Province {
       </form>
     </div>
 
-    <h1> {{login}}!{{password}}!{{confirmPassword}}!{{agree}}!{{loginMeta.invalid}}</h1>
     <h1> {{!this.loginMeta.invalid }} && {{ !this.passwordMeta.invalid }} && {{this.agree}} && {{this.selectedCountry}} && {{this.selectedProvince}}</h1>`,
   styles: [`.invisible{display:none;}`]
 })
@@ -144,7 +142,8 @@ export class Step1Component {
   }
 
   public pullProvince(e) {
-    this.httpClient.get<Province[]>(this.baseUrl + 'api/SampleData/Provinces').subscribe(result => {
+    console.log(e);
+    this.httpClient.get<Province[]>(this.baseUrl + 'api/SampleData/Provinces?countryId='+e.target.value).subscribe(result => {
       this.provinces = result;
     }, error => console.error(error));
   }

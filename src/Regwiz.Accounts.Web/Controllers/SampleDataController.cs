@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -51,16 +52,16 @@ namespace Regwiz.Accounts.Web.Controllers
         }
 
         [HttpGet("[action]")]
-        public IEnumerable<Province> Provinces()
+        public IEnumerable<Province> Provinces( int countryId)
         {
-            //return Enumerable.Range(1, 5).Select(index => new Country
-            //{
-            //    Name = "asd",
-            //    Id = 1
-            //});
+            Debugger.Break();
+            List<Dal.Dto.Province> r = new List<Dal.Dto.Province>();
+            r = _queryDispatcher.Execute<FindProvincesByCountryQuery, Dal.Dto.Province[]>(new FindProvincesByCountryQuery(countryId, false)).ToList();
+            //r.Add(new Dal.Dto.Province(1, countryId, "asd") );
+            return r.Select(x => new Province() { Id = x.Id, Name = x.Name, CountryId = x.Id });
 
-            var r = _queryDispatcher.Execute<FindProvincesBySearchTextQuery, Dal.Dto.Province[]>(new FindProvincesBySearchTextQuery("", false));
-            return r.Select(x => new Province() {Id = x.Id, Name = x.Name, CountryId = x.Id});
+            //so the request comes with correct Id, need to polish dispatcher
+            //return Enumerable.Range(1, 5).Select(x=>new Province() {Name = ""+ countryId +"-"+x,Id = x,CountryId = countryId});
         }
 
         public class Province

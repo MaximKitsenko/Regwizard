@@ -4,7 +4,7 @@ using Regwiz.Accounts.Dal.Repository;
 
 namespace Regwiz.Accounts.Business.Infrastructure.Query.Handlers
 {
-    public class ProvinceQueryHandler : IQueryHandler<FindProvincesBySearchTextQuery, Province[]>
+    public class ProvinceQueryHandler :  IQueryHandler<FindProvincesByCountryQuery, Province[]>
     {
         private readonly IProvinceRepository _repository;
 
@@ -12,15 +12,13 @@ namespace Regwiz.Accounts.Business.Infrastructure.Query.Handlers
         {
             _repository = repository;
         }
+        
 
-        public Province[] Execute(FindProvincesBySearchTextQuery query)
+        public Province[] Execute(FindProvincesByCountryQuery query)
         {
+            //return new Province[]{new Province(1,query.Country,"zxc")};
             var countries = _repository.ReadAll();
-            if ( string.IsNullOrWhiteSpace(query.SearchText))
-            {
-                return countries.ToArray();
-            }
-            return countries.Where(user => user.Name.Contains(query.SearchText)).ToArray();
+            return countries.Where(user => user.CountryId == query.Country).ToArray();
         }
     }
 }
