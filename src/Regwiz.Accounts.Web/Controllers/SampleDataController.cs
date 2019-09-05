@@ -25,12 +25,6 @@ namespace Regwiz.Accounts.Web.Controllers
         [HttpGet("[action]")]
         public IEnumerable<Country> Countries()
         {
-            //return Enumerable.Range(1, 5).Select(index => new Country
-            //{
-            //    Name = "asd",
-            //    Id = 1
-            //});
-
             var r = _queryDispatcher.Execute<FindCountriesBySearchTextQuery,Dal.Dto.Country[]>(new FindCountriesBySearchTextQuery("", false));
             return r.Select(x=> new Country(){Id = x.Id,Name = x.Name});
         }
@@ -41,11 +35,7 @@ namespace Regwiz.Accounts.Web.Controllers
             Debugger.Break();
             List<Dal.Dto.Province> r = new List<Dal.Dto.Province>();
             r = _queryDispatcher.Execute<FindProvincesByCountryQuery, Dal.Dto.Province[]>(new FindProvincesByCountryQuery(countryId, false)).ToList();
-            //r.Add(new Dal.Dto.Province(1, countryId, "asd") );
             return r.Select(x => new Province() { Id = x.Id, Name = x.Name, CountryId = x.Id });
-
-            //so the request comes with correct Id, need to polish dispatcher
-            //return Enumerable.Range(1, 5).Select(x=>new Province() {Name = ""+ countryId +"-"+x,Id = x,CountryId = countryId});
         }
 
 
