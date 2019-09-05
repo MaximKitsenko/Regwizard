@@ -51,7 +51,7 @@ export interface Province {
         <input type="button" (click)="goNext()" name="next" id="next" value="Next" >
       </div>
     </div>
-    <div class="step1" [ngClass]="{invisible: !step2}" >
+    <div [ngClass]="{invisible: !step2}" >
       <form (ngSubmit)="submit()">
         <label for="countries">Country</label>
         <select id="countries" [(ngModel)]="selectedCountry" (change)="pullProvince($event)"  >
@@ -106,7 +106,7 @@ export class Step1Component {
   //https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
   private loginValidatorSo = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^ <>() \[\]\\.,;: \s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  step2: boolean = true;
+  step2: boolean = false;
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.baseUrl = baseUrl;
@@ -122,6 +122,20 @@ export class Step1Component {
     if (!this.loginMeta.invalid && !this.passwordMeta.invalid && this.agree) {
       this.step2 = !this.step2;
     }
+  }
+
+  public submit(e) {
+    console.log(e);
+    var body = {
+      Login: this.login,
+      Password: this.password,
+      CountryId: this.selectedCountry,
+      ProvinceId: this.selectedProvince
+    };
+
+    this.httpClient.post(this.baseUrl + 'api/SampleData/SaveUser', body).subscribe(result => {
+      console.log(result);
+    }, error => console.error(error));
   }
 
   public validateLogin(e) {
