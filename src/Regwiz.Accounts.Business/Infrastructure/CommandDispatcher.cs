@@ -22,7 +22,8 @@ namespace Regwiz.Accounts.Business.Infrastructure
 
             if (handler == null)
                 throw new CommandHandlerNotFoundException(typeof(TCommand).ToString());
-
+            
+            //consistency may be implemented via locking command execution
             handler.Execute(command);
         }
     }
